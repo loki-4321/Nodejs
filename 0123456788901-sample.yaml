@@ -1,0 +1,16 @@
+# Example Account
+schemaVersion: vCurrent
+clusters:
+  - name: mybuilds
+    region: ap-southeast-2
+    queueName: example-account:cicd # optional
+    gitRepositories:
+      - git@github.com:SEEK-Jobs/eng-service-1.git
+      - git@github.com:SEEK-Jobs/eng-service-2.git:w
+      - git@github.com:SEEK-Jobs/eng-service-3.git
+    managedNetworkName: development
+    managedPolicyArns:
+      - arn:aws:iam::012345678901:policy/BuildAgentPolicy
+    cpuArchitecture: arm64 # optional
+    instanceType: t4g.large #optional
+    rootVolumeSize: 32 #optional
