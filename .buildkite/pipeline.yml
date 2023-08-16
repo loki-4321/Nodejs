@@ -6,5 +6,27 @@ steps:
           tag: "lokesh:latest"
     key: "docker-login"
 
+  
+
 agents:
   queue: "default"
+
+
+  #############################
+  agents:
+  queue: <queue>
+steps:
+  - label: 📦 Build & Package
+    plugins:
+      - seek-jobs/gantry#v1.7.0:
+          command: build
+          file: <gantry-container-image-file>
+          region: <region>
+  - wait
+  - label: 🚀 Deploy
+    plugins:
+      - seek-jobs/gantry#v1.7.0:
+          command: apply
+          environment: <environment>
+          file: <gantry-service-file>
+          region: <region>
