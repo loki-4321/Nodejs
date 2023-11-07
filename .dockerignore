@@ -1,0 +1,23 @@
+# Ignore development and build-related files
+node_modules/
+.git/
+.gitignore
+.dockerignore
+Dockerfile.dev
+
+# Ignore test files
+tests/
+testdata/
+
+# Ignore documentation and config files
+docs/
+.editorconfig
+.env
+
+# Ignore temporary files and directories
+.tmp/
+.cache/
+.idea/
+
+# Ignore log files
+*.log
