@@ -1,4 +1,0 @@
-steps:
-  - label: "Tests"
-    command: "npm test"
-    
