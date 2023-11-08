@@ -1,28 +1,28 @@
 steps:
   - label: ":docker: Build and Push to ECR"
-  plugins:
-    - docker#v3.7.0:
-        login: true
-  
-  commands:
-    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 296281347850.dkr.ecr.us-east-1.amazonaws.com
-    - docker build -t lokeshrepo .
-    - docker tag lokeshrepo:latest 296281347850.dkr.ecr.us-east-1.amazonaws.com/lokeshrepo:latest
-    - docker push 296281347850.dkr.ecr.us-east-1.amazonaws.com/lokeshrepo:latest
+    plugins:
+      - docker#v3.7.0:
+          login: true
+    commands:
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 296281347850.dkr.ecr.us-east-1.amazonaws.com
+      - docker build -t lokeshrepo .
+      - docker tag lokeshrepo:latest 296281347850.dkr.ecr.us-east-1.amazonaws.com/lokeshrepo:latest
+      - docker push 296281347850.dkr.ecr.us-east-1.amazonaws.com/lokeshrepo:latest
+
   - label: " :Build: build"
     command: echo "Build the rocket"
     key: build
-  
+
   - label: " Test"
     command: echo "Test the rocket"
     key: test
     depends_on: build
 
   - label: " Deploy"
-    command: echo " Launch the rocket"
+    command: echo "Launch the rocket"
     key: deploy
     depends_on: test
-  
+
   - label: ":package: Package"
     command: tests.sh
     artifact_paths: "pkg/*"
@@ -32,4 +32,3 @@ steps:
     artifact_paths: "artifacts/*"
     agents:
       queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
-    
