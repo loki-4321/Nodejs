@@ -1,5 +1,5 @@
 steps:
-  - label: ":docker: Build and Push to ECR"
+  - label: ":docker: Build and Push to AWS ECR"
     plugins:
       - docker#v3.7.0:
           login: true
