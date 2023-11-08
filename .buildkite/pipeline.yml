@@ -14,7 +14,7 @@ steps:
           login: true
           build: .
           repository: 296281347850.dkr.ecr.us-east-1.amazonaws.com/your-ecr-repo
-          tags: latest
+          tags: latest:v2
 
   - label: " :Build: build"
     command: echo "Build the rocket"
