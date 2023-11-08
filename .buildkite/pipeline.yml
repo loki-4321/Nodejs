@@ -6,7 +6,7 @@ steps:
       - rm -rf /tmp/Nodejs
   - label: ":docker: Build Docker Image"
     commands:
-      - docker build -t dockerss-image -f .
+      - docker build -t dockerss-image .
 
   - label: ":docker: Push to AWS ECR"
     plugins:
