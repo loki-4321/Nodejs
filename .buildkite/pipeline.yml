@@ -9,6 +9,8 @@ steps:
     plugins:
       - docker#v3.7.0:
           login: true
+    env:
+      BUILDKITE_PLUGIN_DOCKER_IMAGE: lokesh-image
     commands:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 296281347850.dkr.ecr.us-east-1.amazonaws.com
       - docker build -t lokeshrepo .
