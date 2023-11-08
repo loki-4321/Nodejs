@@ -6,14 +6,14 @@ steps:
       - rm -rf /tmp/Nodejs
   - label: ":docker: Build Docker Image"
     commands:
-      - docker build -t dockerssh-image 
+      - docker build -t dockerss-image -f .
 
   - label: ":docker: Push to AWS ECR"
     plugins:
       - docker#v3.7.0:
           login: true
           build: .
-          repository: 296281347850.dkr.ecr.us-east-1.amazonaws.com/your-ecr-repo
+          repository: 296281347850.dkr.ecr.us-east-1.amazonaws.com/Nodejs
           tags: latest:v2
 
   - label: " :Build: build"
