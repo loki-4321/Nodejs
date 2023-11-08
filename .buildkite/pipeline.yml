@@ -18,6 +18,9 @@ steps:
           build: .
           repository: 296281347850.dkr.ecr.us-east-1.amazonaws.com/Nodejs
           tags: latest:v2
+   env:
+      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
 
   - label: " :Build: build"
     command: echo "Build the rocket"
