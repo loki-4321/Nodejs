@@ -1,7 +1,8 @@
 steps:
   - label: ":docker: Build and Push to ECR"
-    plugins:
-      - docker#v3.7.0:
+config:
+  plugins:
+    - docker#v3.7.0:
           login: true
     commands:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 296281347850.dkr.ecr.us-east-1.amazonaws.com
