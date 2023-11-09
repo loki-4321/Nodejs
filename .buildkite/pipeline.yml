@@ -5,7 +5,7 @@ steps:
       - cp /tmp/Nodejs/Dockerfile .
       - rm -rf /tmp/Nodejs
 
-  - label: ":docker: Build Docker Image"
+  - label: ":docker: Build Docker Images"
     plugins:
       - docker#v3.7.0:
           login: true
