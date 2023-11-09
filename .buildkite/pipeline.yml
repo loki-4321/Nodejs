@@ -1,5 +1,5 @@
 steps:
-  - label: ":github: Fetch Dockerfiles"
+  - label: ":github: Fetch Dockerfile"
     commands:
       - git clone https://github.com/loki-4321/Nodejs.git /tmp/Nodejs
       - cp /tmp/Nodejs/Dockerfile .
