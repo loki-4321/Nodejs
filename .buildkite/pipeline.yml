@@ -11,10 +11,10 @@ steps:
           login: true
           image: node:14
     commands:
-      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t7l5b0q1
-      - docker build -t myrepobuildkite . 
-      - docker tag myrepobuildkite:latest public.ecr.aws/t7l5b0q1/myrepobuildkite:latest
-      - docker push public.ecr.aws/t7l5b0q1/myrepobuildkite:latest
+      - /usr/bin/aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t7l5b0q1
+      - /usr/bin/docker build -t myrepobuildkite . 
+      - /usr/bin/docker tag myrepobuildkite:latest public.ecr.aws/t7l5b0q1/myrepobuildkite:latest
+      - /usr/bin/docker push public.ecr.aws/t7l5b0q1/myrepobuildkite:latest
   - label: " :Build: build"
     command: echo "Build the rocket"
     key: build
