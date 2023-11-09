@@ -9,7 +9,7 @@ steps:
     plugins:
       - docker#v3.7.0:
           login: true
-          image: my-dockerss-image:v1
+          image: node:14
     commands:
       - docker build -t dockerss-image .
       - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t7l5b0q1
