@@ -19,7 +19,7 @@ steps:
       - docker push public.ecr.aws/t7l5b0q1/myrepobuildkite:latest
   - label: ":cloudformation: Deploy Stack"
     commands:
-      - aws cloudformation deploy --stack-name Lokeshstack --template-file cf.yml --region us-east-1 --capabilities CAPABILITY_IAM
+      - aws cloudformation deploy --stack-name Lokeshstack --template-file .buildkite/cf.yml --region us-east-1 --capabilities CAPABILITY_IAM
   - label: " :Build: build"
     command: echo "Build the rocket"
     key: build
