@@ -5,16 +5,17 @@ steps:
       - cp /tmp/Nodejs/Dockerfile .
       - rm -rf /tmp/Nodejs
 
-  - label: ":docker: Build Docker Images"
+  - label: ":docker: Build Docker Image"
     plugins:
       - docker#v3.7.0:
-          image: "docker:23"
+          image: "docker:20.10.11"
           always_pull: true
+          volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
           environment:
             - DOCKER_BUILDKIT=1
-  - label: ":docker: Build Docker Image"
     commands:
-      - docker build -t dockerssh-image .
+      - docker build -t yourimagename:latest .
     commands:
       - export AWS_REGION=us-east-1 
       - aws configure set region $AWS_REGION
