@@ -1,7 +1,7 @@
 agents:
   queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
 steps:
-  - label: ":github: Fetch Dockerfile"
+  - label: ":github: Fetch Dockerfiles"
     commands:
       - git clone https://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@github.com/loki-4321/Nodejs.git /tmp/Nodejs
       - cp /tmp/Nodejs/Dockerfile .
