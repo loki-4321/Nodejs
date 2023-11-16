@@ -12,9 +12,9 @@ steps:
           #environment: <%- devGantryEnvironmentName %>
           file: containerImage.yaml
           #region: <%- region %>
-          values:
-            - .gantry/common.yml
-            - .gantry/dev.yml
+          #values:
+           # - .gantry/common.yml
+           # - .gantry/dev.yml
           env:
             GITHUB_TOKEN: "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"
   - label: " :Build: build"
