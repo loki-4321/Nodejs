@@ -12,6 +12,7 @@ steps:
           command: build
           file: containerImage.yaml
           region: us-east-1
+          git_url: https://github.com/loki-4321/Nodejs.git
   - wait
   - label: 🚀 Deploy
     plugins:
@@ -20,4 +21,5 @@ steps:
           environment: dev
           file: service.yaml
           region: us-east-1
+          git_url: https://github.com/loki-4321/Nodejs.git
         
