@@ -10,10 +10,11 @@ steps:
       - docker#v3.7.0:
           image: "docker:23"
           always_pull: true
-          volumes:
-            - "/var/run/docker.sock:/var/run/docker.sock"
           environment:
             - DOCKER_BUILDKIT=1
+  - label: ":docker: Build Docker Image"
+    commands:
+      - docker build -t dockerssh-image .
     commands:
       - export AWS_REGION=us-east-1 
       - aws configure set region $AWS_REGION
