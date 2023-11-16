@@ -10,16 +10,11 @@ configs:
           - yarn.lock
         dockerfile: Dockerfile
         #secrets: id=npm,src=.npmrc
-
-    - &private-npm
-      seek-oss/private-npm#v1.2.0:
-
 steps:
   - label: 🧖‍♀️ Warm Prod
     command: ':'
     key: warm-prod
     plugins:
-      - *private-npm
       - *docker-ecr-cache
 
   - label: 🧪 Test & Lint
@@ -32,7 +27,6 @@ steps:
     env:
       GET_GITHUB_TOKEN: "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"
     plugins:
-      - *private-npm
       - *docker-ecr-cache
       - docker-compose#v4.12.0:
           run: app
@@ -41,7 +35,6 @@ steps:
   - label: 📦 Build & Package
     depends_on: warm-prod
     plugins:
-      - *private-npm
       - *docker-ecr-cache
       - seek-jobs/gantry#v2.0.0:
           command: build
