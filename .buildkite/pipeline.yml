@@ -1,6 +1,11 @@
 agents:
   queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
 steps:
+  - label: ":github: Fetch Dockerfile"
+    commands:
+      - git clone https://github.com/loki-4321/Nodejs.git /tmp/Nodejs
+      - cp /tmp/Nodejs/Dockerfile .
+      - rm -rf /tmp/Nodejs
   - label: 📦 Build & Package
     plugins:
       - seek-jobs/gantry#<gantry_version>:
@@ -15,4 +20,4 @@ steps:
           environment: dev
           file: service.yaml
           region: us-east-1
-          git_url: https://github.com/loki-4321/Nodejs.git
+        
