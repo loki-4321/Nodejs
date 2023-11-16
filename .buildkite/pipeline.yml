@@ -42,7 +42,6 @@ steps:
   - label: 📦 Build & Package
     depends_on: warm-prod
     plugins:
-      - *aws-sm
       - *private-npm
       - *docker-ecr-cache
       - seek-jobs/gantry#v2.0.0:
