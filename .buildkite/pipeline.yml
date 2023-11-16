@@ -1,44 +1,17 @@
 agents:
   queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
-
-configs:
-  plugins:
-    - &docker-ecr-cache
-      seek-oss/docker-ecr-cache#v2.0.0:
-        cache-on:
-          - package.json
-          - yarn.lock
-        dockerfile: Dockerfile
-        #secrets: id=npm,src=.npmrc
-        aws-region: us-east-1
 steps:
-  - label: 🧖‍♀️ Warm Prod
-    command: ':'
-    key: warm-prod
-    plugins:
-      - *docker-ecr-cache
-
-  - label: 🧪 Test & Lint
-    commands:
-      - echo '+++ yarn test:ci'
-      - yarn test:ci
-      - echo '--- yarn lint'
-      - yarn lint
-    depends_on: warm-prod
-    env:
-      GET_GITHUB_TOKEN: "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"
-    plugins:
-      - *docker-ecr-cache
-      - docker-compose#v4.12.0:
-          run: app
-    timeout_in_minutes: 10
-
   - label: 📦 Build & Package
-    depends_on: warm-prod
     plugins:
-      - *docker-ecr-cache
-      - seek-jobs/gantry#v2.0.0:
+      - seek-jobs/gantry#<gantry_version>:
           command: build
-          file: gantrybuild.yml
-          region: <%- region %>
-          values: .gantry/values-dev.yml
+          file: containerImage.yaml
+          region: us-east-1
+  - wait
+  - label: 🚀 Deploy
+    plugins:
+      - seek-jobs/gantry#<gantry_version>:
+          command: apply
+          environment: development
+          file: service.yaml
+          region: us-east-1
