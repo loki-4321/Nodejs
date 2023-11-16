@@ -16,7 +16,7 @@ steps:
             - .gantry/common.yml
             - .gantry/dev.yml
           env:
-            GITHUB_TOKEN: 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
+            GITHUB_TOKEN: "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"
   - label: " :Build: build"
     command: echo "Build the rocket"
     key: build
