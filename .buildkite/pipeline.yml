@@ -7,11 +7,14 @@ steps:
 
   - label: ":docker: Push to AWS ECR"
     plugins:
-      - docker#v3.7.0:
-          login: true
-          build: .
-          repository: 296281347850.dkr.ecr.us-east-1.amazonaws.com/lokeshrepo:latests
-          tags: latest:v2
+      - seek-jobs/gantry#v2.0.0:
+          command: apply
+          environment: <%- devGantryEnvironmentName %>
+          file: containerImage.yaml
+          #region: <%- region %>
+          values:
+            - .gantry/common.yml
+            - .gantry/dev.yml
   - label: " :Build: build"
     command: echo "Build the rocket"
     key: build
