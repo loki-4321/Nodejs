@@ -1,0 +1,4 @@
+# values.yaml
+name: myservice
+region: us-east-1
+image: '{{.AWSAccountID}}.dkr.ecr.{{values "region"}}.amazonaws.com/{{ values "name"}}:{{.BuildID}}'
