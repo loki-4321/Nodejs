@@ -5,17 +5,13 @@ steps:
       - cp /tmp/Nodejs/Dockerfile .
       - rm -rf /tmp/Nodejs
 
-  - label: ":docker: Build Docker Image"
+  - label: ":docker: Push to AWS ECR"
     plugins:
       - docker#v3.7.0:
-          image: "docker:20.10.11"
-          always_pull: true
-          volumes:
-            - "/var/run/docker.sock:/var/run/docker.sock"
-          environment:
-            - DOCKER_BUILDKIT=1
-    commands:
-      - docker build -t yourimagename:latest .
+          login: true
+          build: .
+          repository: 296281347850.dkr.ecr.us-east-1.amazonaws.com/lokeshrepo:latest
+          tags: latest
     commands:
       - export AWS_REGION=us-east-1 
       - aws configure set region $AWS_REGION
