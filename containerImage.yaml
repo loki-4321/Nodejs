@@ -1,0 +1,4 @@
+kind: containerImage
+image: "{{.AWSAccountID}}.dkr.ecr.{{.Region}}.amazonaws.com/example:{{.BuildID}}"
+schemaVersion: v0.0
+cpuArchitecture: arm64
