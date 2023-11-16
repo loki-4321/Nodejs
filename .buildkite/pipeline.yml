@@ -13,7 +13,6 @@ configs:
 
     - &private-npm
       seek-oss/private-npm#v1.2.0:
-        env: NPM_READ_TOKEN
 
 steps:
   - label: 🧖‍♀️ Warm Prod
@@ -31,7 +30,7 @@ steps:
       - yarn lint
     depends_on: warm-prod
     env:
-      GET_GITHUB_TOKEN: please
+      GET_GITHUB_TOKEN: "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"
     plugins:
       - *private-npm
       - *docker-ecr-cache
