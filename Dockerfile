@@ -9,6 +9,13 @@ COPY package*.json ./
 
 # Install Node.js dependencies
 RUN npm install
+# Use an official Amazon Linux image
+FROM amazonlinux:2
+
+# Install required dependencies
+RUN yum install -y \
+    aws-cli \
+    && yum clean all
 
 # Copy the rest of the application source code to the container
 COPY . .
