@@ -13,6 +13,8 @@ steps:
           file: containerImage.yaml
           region: us-east-1
           git_url: https://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@github.com/loki-4321/Nodejs.git
+    env:
+      GET_GITHUB_TOKEN: "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"
   - wait
   - label: 🚀 Deploy
     plugins:
