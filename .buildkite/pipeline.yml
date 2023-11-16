@@ -12,6 +12,6 @@ steps:
     plugins:
       - seek-jobs/gantry#<gantry_version>:
           command: apply
-          environment: development
+          environment: dev
           file: service.yaml
           region: us-east-1
