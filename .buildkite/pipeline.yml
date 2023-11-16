@@ -10,6 +10,7 @@ configs:
           - yarn.lock
         dockerfile: Dockerfile
         #secrets: id=npm,src=.npmrc
+        aws-region: us-east-1
 steps:
   - label: 🧖‍♀️ Warm Prod
     command: ':'
