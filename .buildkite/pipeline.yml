@@ -9,7 +9,7 @@ steps:
     plugins:
       - seek-jobs/gantry#v2.0.0:
           command: gantry build --file containerImage.yaml --region ap-southeast-2
-          environment: <%- devGantryEnvironmentName %>
+          #environment: <%- devGantryEnvironmentName %>
           file: containerImage.yaml
           #region: <%- region %>
           values:
