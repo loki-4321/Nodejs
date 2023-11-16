@@ -10,18 +10,8 @@ steps:
       - docker#v3.7.0:
           login: true
           build: .
-          repository: 296281347850.dkr.ecr.us-east-1.amazonaws.com/lokeshrepo:latest
-          tags: latest
-    commands:
-      - export AWS_REGION=us-east-1 
-      - aws configure set region $AWS_REGION
-      - $(aws ecr-public get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin public.ecr.aws/t7l5b0q1)
-      - docker build -t myrepobuildkite . 
-      - docker tag myrepobuildkite:latest public.ecr.aws/t7l5b0q1/myrepobuildkite:latest
-      - docker push public.ecr.aws/t7l5b0q1/myrepobuildkite:latest
-  - label: ":cloudformation: Deploy Stack"
-    commands:
-      - aws cloudformation deploy --stack-name Lokeshstac --template-file .buildkite/cf.yml --region us-east-1 
+          repository: 296281347850.dkr.ecr.us-east-1.amazonaws.com/lokeshrepo:latests
+          tags: latest:v2
   - label: " :Build: build"
     command: echo "Build the rocket"
     key: build
