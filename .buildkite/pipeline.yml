@@ -1,26 +1,45 @@
-agents:
-  queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
 steps:
-  - label: ":github: Fetch Dockerfiles"
+  - label: ":github: Fetch Dockerfile"
     commands:
-      - git clone https://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@github.com/loki-4321/Nodejs.git /tmp/Nodejs
+      - git clone https://github.com/loki-4321/Nodejs.git /tmp/Nodejs
       - cp /tmp/Nodejs/Dockerfile .
       - rm -rf /tmp/Nodejs
-  - label: 📦 Build & Package
+  - label: ":docker: Build Docker Image"
+    commands:
+      - docker build -t dockerssh-image 
+
+  - label: ":docker: Build and Push to AWS ECR"
     plugins:
-      - seek-jobs/gantry#<gantry_version>:
-          command: build
-          file: containerImage.yaml
-          region: us-east-1
-          git_url: https://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@github.com/loki-4321/Nodejs.git
+      - docker#v3.7.0:
+          login: true
     env:
-      GET_GITHUB_TOKEN: "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"
-  - wait
-  - label: 🚀 Deploy
-    plugins:
-      - seek-jobs/gantry#<gantry_version>:
-          command: apply
-          environment: dev
-          file: service.yaml
-          git_url: https://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@github.com/loki-4321/Nodejs.git
-        
+      BUILDKITE_PLUGIN_DOCKER_IMAGE: dockerssh-image 
+    commands:
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 296281347850.dkr.ecr.us-east-1.amazonaws.com
+      - docker build -t lokeshrepo .
+      - docker tag lokeshrepo:latest 296281347850.dkr.ecr.us-east-1.amazonaws.com/lokeshrepo:latest
+      - docker push 296281347850.dkr.ecr.us-east-1.amazonaws.com/lokeshrepo:latest
+
+  - label: " :Build: build"
+    command: echo "Build the rocket"
+    key: build
+
+  - label: " Test"
+    command: echo "Test the rocket"
+    key: test
+    depends_on: build
+
+  - label: " Deploy"
+    command: echo "Launch the rocket"
+    key: deploy
+    depends_on: test
+
+  - label: ":package: Package"
+    command: tests.sh
+    artifact_paths: "pkg/*"
+    
+  - label: ":hammer: Example Script"
+    command: "tests.sh"
+    artifact_paths: "artifacts/*"
+    agents:
+      queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
